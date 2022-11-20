@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - master
+# artifacts are folders created by jobs like dist folder
+# outputs are values created by jobs like filename
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -28,7 +31,7 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
-    outputs: 
+    outputs:
       script-file: ${{ steps.publish.outputs.script-file }}
     steps:
       - name: Get code
@@ -54,7 +57,7 @@ jobs:
           name: dist-files
           path: dist
           # files to upload
-          # path: | 
+          # path: |
           #   dist
           #   package.json
   deploy:
